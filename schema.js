@@ -41,6 +41,7 @@ const typeDefs = gql`
 
   type Query {
     pizzas: [Pizza]!
+    pizzaByIds(pizzaIds: [ID!]!): [Pizza!]!
     EURRate: Float!
     me: User
     orders(user: ID!): [Order]!

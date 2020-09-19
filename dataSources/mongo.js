@@ -31,6 +31,14 @@ const getPizzas = async () => {
   return await Pizza.find({});
 };
 
+const getPizzaByIds = async ({ pizzaIds }) => {
+  return await Pizza.find({
+    _id: {
+      $in: pizzaIds,
+    },
+  });
+};
+
 const getOrders = async ({ user }) => {
   const orders = await Order.find({ user: user })
     .populate("user")
@@ -77,4 +85,4 @@ const me = async (ctx) => {
   return await User.findOne({ _id: ctx.request.userId });
 };
 
-module.exports = { getPizzas, getOrders, addOrder, signIn, me };
+module.exports = { getPizzas, getOrders, addOrder, signIn, me, getPizzaByIds };
