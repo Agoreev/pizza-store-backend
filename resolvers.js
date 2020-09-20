@@ -4,13 +4,14 @@ const {
   me,
   addOrder,
   getOrders,
+  getPizzaById,
 } = require("./dataSources/mongo");
 const { getEURRate } = require("./dataSources/currency");
 
 const resolvers = {
   Query: {
     pizzas: async () => await getPizzas(),
-    pizzaByIds: async (parent, args, ctx, info) => await getPizzaByIds(args),
+    pizza: async (parent, args, ctx, info) => await getPizzaById(args),
     orders: async (parent, args, ctx, info) => await getOrders(args),
     EURRate: async () => await getEURRate(),
     me: async (parent, args, ctx, info) => await me(ctx),
