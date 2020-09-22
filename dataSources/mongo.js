@@ -18,9 +18,19 @@ const userSchema = new Schema({
 
 const orderSchema = new Schema({
   user: { type: ObjectId, ref: "user" },
-  address: String,
-  orderContent: [{ pizza: { type: ObjectId, ref: "pizza" }, count: Number }],
+  name: String,
+  phone: String,
+  email: String,
+  city: String,
+  street: String,
+  house: String,
+  deliveryMethod: String,
+  currency: String,
+  rate: Number,
   totalPrice: Number,
+  items: [
+    { pizzaId: { type: ObjectId, ref: "pizza" }, price: Number, count: Number },
+  ],
 });
 
 const Pizza = mongoose.model("pizza", pizzaSchema);
@@ -40,17 +50,20 @@ const getPizzaById = async ({ pizzaId }) => {
 const getOrders = async ({ user }) => {
   const orders = await Order.find({ user: user })
     .populate("user")
-    .populate("orderContent.pizza")
+    .populate("items.pizza")
     .exec();
   return orders;
 };
 
-const addOrder = async ({ order }) => {
-  const newOrder = new Order(order);
+const addOrder = async ({ order }, ctx) => {
+  const orderWithUser = { ...order, user: ctx.req.userId };
+
+  const newOrder = new Order(orderWithUser);
+  console.log(newOrder);
   const savedOrder = await newOrder.save();
   const populatedOrder = await Order.findOne({ _id: savedOrder._id })
     .populate("user")
-    .populate("orderContent.pizza")
+    .populate("items.pizza")
     .exec();
   return populatedOrder;
 };

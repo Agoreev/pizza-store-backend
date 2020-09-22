@@ -17,7 +17,7 @@ const resolvers = {
     me: async (parent, args, ctx, info) => await me(ctx),
   },
   Mutation: {
-    addOrder: async (parent, args, ctx, info) => await addOrder(args),
+    addOrder: async (parent, args, ctx, info) => await addOrder(args, ctx),
     signIn: async (parent, args, ctx, info) => await signIn(args, ctx),
   },
 };

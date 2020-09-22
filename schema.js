@@ -17,25 +17,42 @@ const typeDefs = gql`
   type Order {
     _id: ID!
     user: User!
-    address: String!
-    orderContent: [OrderContent]!
+    name: String!
+    phone: String!
+    email: String!
+    city: String!
+    street: String!
+    house: String!
+    deliveryMethod: String!
+    currency: String!
+    rate: Float!
     totalPrice: Float!
+    items: [OrderItem!]!
   }
 
   input OrderInput {
-    user: ID!
-    address: String
-    orderContent: [OrderContentInput]!
+    name: String!
+    phone: String!
+    email: String!
+    city: String!
+    street: String!
+    house: String!
+    deliveryMethod: String!
+    currency: String!
+    rate: Float!
     totalPrice: Float!
+    items: [OrderItemInput!]!
   }
 
-  type OrderContent {
-    pizza: Pizza!
+  type OrderItem {
+    pizzaId: ID!
+    price: Float!
     count: Int!
   }
 
-  input OrderContentInput {
-    pizza: ID!
+  input OrderItemInput {
+    pizzaId: ID!
+    price: Float!
     count: Int!
   }
 
@@ -49,7 +66,7 @@ const typeDefs = gql`
 
   type Mutation {
     addOrder(order: OrderInput): Order
-    signIn(name: String, phone: String!): User!
+    signIn(name: String, phone: String): User!
   }
 `;
 
