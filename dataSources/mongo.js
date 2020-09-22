@@ -59,7 +59,6 @@ const addOrder = async ({ order }, ctx) => {
   const orderWithUser = { ...order, user: ctx.req.userId };
 
   const newOrder = new Order(orderWithUser);
-  console.log(newOrder);
   const savedOrder = await newOrder.save();
   const populatedOrder = await Order.findOne({ _id: savedOrder._id })
     .populate("user")
@@ -90,10 +89,10 @@ const signIn = async ({ name, phone }, ctx) => {
 
 const me = async (ctx) => {
   //check if there is a current userId
-  if (!ctx.request.userId) {
+  if (!ctx.req.userId) {
     return null;
   }
-  return await User.findOne({ _id: ctx.request.userId });
+  return await User.findOne({ _id: ctx.req.userId });
 };
 
 module.exports = {
