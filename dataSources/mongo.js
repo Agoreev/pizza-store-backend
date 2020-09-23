@@ -94,6 +94,7 @@ const signIn = async ({ name, phone }, ctx) => {
   ctx.res.cookie("token", token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 365,
+    sameSite: "none",
   });
   return user;
 };
