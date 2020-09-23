@@ -17,6 +17,7 @@ const typeDefs = gql`
   type Order {
     _id: ID!
     user: User!
+    date: String!
     name: String!
     phone: String!
     email: String!
@@ -24,6 +25,7 @@ const typeDefs = gql`
     street: String!
     house: String!
     deliveryMethod: String!
+    deliveryCost: Int!
     currency: String!
     rate: Float!
     totalPrice: Float!
@@ -33,11 +35,13 @@ const typeDefs = gql`
   input OrderInput {
     name: String!
     phone: String!
+    date: String!
     email: String!
     city: String!
     street: String!
     house: String!
     deliveryMethod: String!
+    deliveryCost: Int!
     currency: String!
     rate: Float!
     totalPrice: Float!
@@ -60,6 +64,7 @@ const typeDefs = gql`
     pizzas: [Pizza]!
     pizza(pizzaId: ID!): Pizza!
     EURRate: Float!
+    deliveryCost: Float!
     me: User
     orders: [Order]!
   }

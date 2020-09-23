@@ -14,6 +14,7 @@ const resolvers = {
     pizza: async (parent, args, ctx, info) => await getPizzaById(args),
     orders: async (parent, args, ctx, info) => await getOrders(ctx),
     EURRate: async () => await getEURRate(),
+    deliveryCost: () => 2,
     me: async (parent, args, ctx, info) => await me(ctx),
   },
   Mutation: {

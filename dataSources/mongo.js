@@ -18,6 +18,7 @@ const userSchema = new Schema({
 
 const orderSchema = new Schema({
   user: { type: ObjectId, ref: "user" },
+  date: Date,
   name: String,
   phone: String,
   email: String,
@@ -25,6 +26,7 @@ const orderSchema = new Schema({
   street: String,
   house: String,
   deliveryMethod: String,
+  deliveryCost: Number,
   currency: String,
   rate: Number,
   totalPrice: Number,
