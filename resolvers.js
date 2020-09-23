@@ -20,6 +20,10 @@ const resolvers = {
   Mutation: {
     addOrder: async (parent, args, ctx, info) => await addOrder(args, ctx),
     signIn: async (parent, args, ctx, info) => await signIn(args, ctx),
+    signOut(parent, args, ctx, info) {
+      ctx.res.clearCookie("token");
+      return "Goodbye!";
+    },
   },
 };
 

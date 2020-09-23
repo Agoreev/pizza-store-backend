@@ -72,6 +72,7 @@ const typeDefs = gql`
   type Mutation {
     addOrder(order: OrderInput): Order
     signIn(name: String, phone: String): User!
+    signOut: String!
   }
 `;
 

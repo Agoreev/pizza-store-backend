@@ -56,6 +56,7 @@ const getOrders = async (ctx) => {
   }
 
   const orders = await Order.find({ user: ctx.req.userId })
+    .sort([["date", -1]])
     .populate("user")
     .populate("items.pizza")
     .exec();
