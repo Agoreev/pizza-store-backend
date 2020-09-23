@@ -29,7 +29,7 @@ const orderSchema = new Schema({
   rate: Number,
   totalPrice: Number,
   items: [
-    { pizzaId: { type: ObjectId, ref: "pizza" }, price: Number, count: Number },
+    { pizza: { type: ObjectId, ref: "pizza" }, price: Number, count: Number },
   ],
 });
 
@@ -47,8 +47,13 @@ const getPizzaById = async ({ pizzaId }) => {
   });
 };
 
-const getOrders = async ({ user }) => {
-  const orders = await Order.find({ user: user })
+const getOrders = async (ctx) => {
+  //check if there is a current userId
+  if (!ctx.req.userId) {
+    return null;
+  }
+
+  const orders = await Order.find({ user: ctx.req.userId })
     .populate("user")
     .populate("items.pizza")
     .exec();
@@ -56,7 +61,13 @@ const getOrders = async ({ user }) => {
 };
 
 const addOrder = async ({ order }, ctx) => {
-  const orderWithUser = { ...order, user: ctx.req.userId };
+  const items = order.items;
+  var i;
+  for (i = 0; i < items.length; i++) {
+    items[i].pizza = items[i]["pizzaId"];
+    delete items[i].pizzaId;
+  }
+  const orderWithUser = { ...order, user: ctx.req.userId, items };
 
   const newOrder = new Order(orderWithUser);
   const savedOrder = await newOrder.save();

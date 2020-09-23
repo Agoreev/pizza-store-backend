@@ -12,7 +12,7 @@ const resolvers = {
   Query: {
     pizzas: async () => await getPizzas(),
     pizza: async (parent, args, ctx, info) => await getPizzaById(args),
-    orders: async (parent, args, ctx, info) => await getOrders(args),
+    orders: async (parent, args, ctx, info) => await getOrders(ctx),
     EURRate: async () => await getEURRate(),
     me: async (parent, args, ctx, info) => await me(ctx),
   },

@@ -45,7 +45,7 @@ const typeDefs = gql`
   }
 
   type OrderItem {
-    pizzaId: ID!
+    pizza: Pizza!
     price: Float!
     count: Int!
   }
@@ -61,7 +61,7 @@ const typeDefs = gql`
     pizza(pizzaId: ID!): Pizza!
     EURRate: Float!
     me: User
-    orders(user: ID!): [Order]!
+    orders: [Order]!
   }
 
   type Mutation {
