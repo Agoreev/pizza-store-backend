@@ -20,7 +20,7 @@ const typeDefs = gql`
     date: String!
     name: String!
     phone: String!
-    email: String!
+    email: String
     city: String!
     street: String!
     house: String!
@@ -36,7 +36,7 @@ const typeDefs = gql`
     name: String!
     phone: String!
     date: String!
-    email: String!
+    email: String
     city: String!
     street: String!
     house: String!
@@ -71,7 +71,7 @@ const typeDefs = gql`
 
   type Mutation {
     addOrder(order: OrderInput): Order
-    signIn(name: String, phone: String): User!
+    signIn(name: String!, phone: String!): User!
     signOut: String!
   }
 `;

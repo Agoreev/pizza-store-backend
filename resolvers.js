@@ -21,7 +21,10 @@ const resolvers = {
     addOrder: async (parent, args, ctx, info) => await addOrder(args, ctx),
     signIn: async (parent, args, ctx, info) => await signIn(args, ctx),
     signOut(parent, args, ctx, info) {
-      ctx.res.clearCookie("token");
+      ctx.res.clearCookie("token", {
+        sameSite: "none",
+        secure: true,
+      });
       return "Goodbye!";
     },
   },
